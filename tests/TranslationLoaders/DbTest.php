@@ -3,17 +3,16 @@
 namespace Spatie\TranslationLoader\Test\TranslationLoaders;
 
 use DB;
-use Illuminate\Translation\Translator;
+use Spatie\TranslationLoader\Exceptions\InvalidConfiguration;
 use Spatie\TranslationLoader\LanguageLine;
 use Spatie\TranslationLoader\Test\TestCase;
-use Spatie\TranslationLoader\Exceptions\InvalidConfiguration;
 
 class DbTest extends TestCase
 {
     /** @var \Spatie\TranslationLoader\LanguageLine */
     protected $languageLine;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
     }

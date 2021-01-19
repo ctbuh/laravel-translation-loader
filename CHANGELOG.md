@@ -2,6 +2,48 @@
 
 All notable changes to `laravel-translation-loader` will be documented in this file
 
+## 2.7.0 - 2020-12-04
+
+- add support for php 8.0
+- drop support for laravel 5.8
+
+## 2.6.3 - 2020-10-02
+
+- bugfix: support translations from json files (#114)
+
+## 2.6.2 - 2020-09-09
+
+- Support Laravel 8
+
+## 2.6.1 - 2020-04-09
+
+- improve migration
+
+## 2.6.0 - 2020-03-03
+
+- drop support for PHP 7.1
+
+## 2.5.0 - 2020-03-03
+
+- add support for Laravel 7
+
+## 2.4.0 - 2019-09-04
+
+- make compatible with Laravel 6
+
+## 2.3.0 - 2019-02-27
+
+- drop support for Laravel 5.7 and below
+- drop support for PHP 7.1 and below
+
+## 2.2.4 - 2019-02-27
+
+- add support for Laravel 5.8
+
+## 2.2.3 - 2019-02-01
+
+- use Arr:: and Str:: functions
+
 ## 2.2.2 - 2018-10-25
 
 - make `flushGroupCache` public

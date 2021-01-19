@@ -2,8 +2,9 @@
 
 namespace Spatie\TranslationLoader;
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
 
 class LanguageLine extends Model
 {
@@ -20,7 +21,7 @@ class LanguageLine extends Model
     {
         parent::boot();
 
-        $flushGroupCache = function (LanguageLine $languageLine) {
+        $flushGroupCache = function (self $languageLine) {
             $languageLine->flushGroupCache();
         };
 
@@ -32,16 +33,21 @@ class LanguageLine extends Model
     {
         return Cache::rememberForever(static::getCacheKey($group, $locale), function () use ($group, $locale) {
             return static::query()
-                ->where('group', $group)
-                ->get()
-                ->reduce(function ($lines, LanguageLine $languageLine) use ($locale) {
-                    $translation = $languageLine->getTranslation($locale);
-                    if ($translation !== null) {
-                        array_set($lines, $languageLine->key, $translation);
-                    }
+                    ->where('group', $group)
+                    ->get()
+                    ->reduce(function ($lines, self $languageLine) use ($group, $locale) {
+                        $translation = $languageLine->getTranslation($locale);
 
-                    return $lines;
-                }) ?? [];
+                        if ($translation !== null && $group === '*') {
+                            // Make a flat array when returning json translations
+                            $lines[$languageLine->key] = $translation;
+                        } elseif ($translation !== null && $group !== '*') {
+                            // Make a nesetd array when returning normal translations
+                            Arr::set($lines, $languageLine->key, $translation);
+                        }
+
+                        return $lines;
+                    }) ?? [];
         });
     }
 
