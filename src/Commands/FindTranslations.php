@@ -52,7 +52,7 @@ class FindTranslations extends Command
     {
         // got it from: https://github.com/barryvdh/laravel-translation-manager/blob/master/src/Manager.php#L153
 
-        $functions = array('trans',
+        $functions = ['trans',
             'trans_choice',
             'Lang::get',
             'Lang::choice',
@@ -62,7 +62,7 @@ class FindTranslations extends Command
             '@choice',
             '__',
             '$trans.get',
-        );
+        ];
 
         $path = base_path();
 
@@ -89,7 +89,7 @@ class FindTranslations extends Command
             "[\),]";                                       // Close parentheses or new parameter
 
 
-        $exclude = array('bootstrap', 'config', 'database', 'public', 'storage', 'tests', 'vendor');
+        $exclude = ['bootstrap', 'config', 'database', 'public', 'storage', 'tests', 'vendor'];
 
         // Find all PHP + Twig files in the app folder, except for storage
         $finder = new Finder();
@@ -132,12 +132,11 @@ https://github.com/vsch/laravel-translation-manager/blob/389d76ba411b8e0df67d4c6
 
         $str = "groups.create";
 
-        $ignore = array('bootstrap', 'config', 'database', 'public', 'storage', 'tests', 'vendor');
+        $ignore = ['bootstrap', 'config', 'database', 'public', 'storage', 'tests', 'vendor'];
         $ret = (new Finder())->files()->name('*.php')->in(base_path())->exclude($ignore)->contains($str);
 
         foreach ($ret as $file) {
             dump($file);
         }
-
     }
 }

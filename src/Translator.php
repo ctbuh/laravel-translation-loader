@@ -6,7 +6,7 @@ use Illuminate\Translation\Translator as BaseTranslator;
 
 class Translator extends BaseTranslator
 {
-    protected $keys_used = array();
+    protected $keys_used = [];
 
     public function getKeysUsed()
     {
@@ -23,7 +23,7 @@ class Translator extends BaseTranslator
             // event('translation.missing', 'hgfh');
         }
 
-        if (!in_array($key, $this->keys_used)) {
+        if (! in_array($key, $this->keys_used)) {
             $this->keys_used[] = $key;
         }
 

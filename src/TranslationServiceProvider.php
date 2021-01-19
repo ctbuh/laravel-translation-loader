@@ -16,7 +16,6 @@ class TranslationServiceProvider extends IlluminateTranslationServiceProvider
         parent::register();
 
         $this->app->singleton('translator', function ($app) {
-
             $loader = $app['translation.loader'];
             // When registering the translator component, we'll need to set the default
             // locale as well as the fallback locale. So, we'll grab the application
@@ -36,12 +35,12 @@ class TranslationServiceProvider extends IlluminateTranslationServiceProvider
      */
     public function boot()
     {
-        if ($this->app->runningInConsole() && !str_contains($this->app->version(), 'Lumen')) {
+        if ($this->app->runningInConsole() && ! str_contains($this->app->version(), 'Lumen')) {
             $this->publishes([
                 __DIR__ . '/../config/translation-loader.php' => config_path('translation-loader.php'),
             ], 'config');
 
-            if (!class_exists('CreateLanguageLinesTable')) {
+            if (! class_exists('CreateLanguageLinesTable')) {
                 $timestamp = date('Y_m_d_His', time());
 
                 $this->publishes([
@@ -58,7 +57,7 @@ class TranslationServiceProvider extends IlluminateTranslationServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                FindTranslations::class
+                FindTranslations::class,
             ]);
         }
     }
